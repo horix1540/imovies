@@ -3,14 +3,18 @@
 [![Node.js Version](https://img.shields.io/badge/Node.js-v20%20LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React Version](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Vite Version](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-7.0%20ReplicaSet-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas%20ReplicaSet-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/cloud/atlas)
 [![Socket.io](https://img.shields.io/badge/Socket.io-4.8%20Realtime-010101?logo=socket.io&logoColor=white)](https://socket.io/)
 [![Payment Gateway](https://img.shields.io/badge/Razorpay-Test%20Mode-0C2340?logo=razorpay&logoColor=white)](https://razorpay.com/)
-[![Deployment](https://img.shields.io/badge/Deployed-Vercel-black?logo=vercel&logoColor=white)](https://imovies-ticket-booking-mq7l.vercel.app/)
+[![Frontend Deployment](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel&logoColor=white)](https://imovies-iota.vercel.app/)
+[![Backend Deployment](https://img.shields.io/badge/Backend-Render-46E3B7?logo=render&logoColor=white)](https://imovies-57vs.onrender.com/api/health)
 
-> **IMovies** is a full-featured, enterprise-grade cinema ticket booking and auditorium management platform built using the **MERN** stack (MongoDB, Express, React, Node.js). It features an interactive curved seat-map designer, real-time seat lock engine, multi-document ACID transactional booking, Razorpay payment processing, dynamic QR-code entry passes, automated in-memory PDF ticket generation with instant email delivery, real Gmail OTP password resets, movie watchlists, fully mobile-responsive UI, and an administrative command center with gate admission scanning and business intelligence reports.
+> **IMovies** is a full-featured, enterprise-grade cinema ticket booking and auditorium management platform built using the **MERN** stack (MongoDB, Express, React, Node.js). It features an interactive curved seat-map designer, Cyber Emerald aesthetic, real-time seat lock engine, multi-document ACID transactional booking, Razorpay payment processing, dynamic QR-code entry passes, automated in-memory PDF ticket generation with instant Brevo email delivery, real Gmail OTP password resets, movie watchlists, fully mobile-responsive UI, and an administrative command center with gate admission scanning and business intelligence reports.
 
-🌐 **Live Production Deployment:** [https://imovies-ticket-booking-mq7l.vercel.app](https://imovies-ticket-booking-mq7l.vercel.app)
+- 🌐 **Live Frontend (Vercel):** [https://imovies-iota.vercel.app](https://imovies-iota.vercel.app)
+- ⚙️ **Live Backend API (Render):** [https://imovies-57vs.onrender.com](https://imovies-57vs.onrender.com)
+- 🩺 **API Health Check:** [https://imovies-57vs.onrender.com/api/health](https://imovies-57vs.onrender.com/api/health)
+- 📦 **GitHub Repository:** [https://github.com/horix1540/imovies](https://github.com/horix1540/imovies)
 
 ---
 
@@ -281,8 +285,8 @@ movies-seat-booking/
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/shahnawajkhankhan186-ops/imovies-ticket-booking.git
-cd imovies-ticket-booking
+git clone https://github.com/horix1540/imovies.git
+cd imovies
 ```
 
 ### Step 2: Install All Dependencies
@@ -374,12 +378,13 @@ npm run seed
 
 ### Ready-To-Use Demo Credentials
 
-| Role                     | Email               | Password    | Features Accessible                                                                      |
-| :----------------------- | :------------------ | :---------- | :--------------------------------------------------------------------------------------- |
-| **System Administrator** | `admin@imovies.com` | `Admin@123` | Full admin control, screen layout designer, gate admission scanner, reviews, CSV reports |
-| **User (Demo 1)**        | `rahul@example.com` | `User@123`  | Browse, hold seats, simulate payment, view QR & PDF tickets                              |
-| **User (Demo 2)**        | `priya@example.com` | `User@123`  | Multi-user seat reservation & concurrency testing                                        |
-| **User (Demo 3)**        | `amit@example.com`  | `User@123`  | Booking cancellation and refunds testing                                                 |
+| Role                     | Email                         | Password    | Features Accessible                                                                      |
+| :----------------------- | :---------------------------- | :---------- | :--------------------------------------------------------------------------------------- |
+| **System Administrator** | `satyamgupta93455@gmail.com`  | `Admin@123` | Full admin control, screen layout designer, gate admission scanner, reviews, CSV reports |
+| **System Administrator** | `admin@imovies.com`           | `Admin@123` | Alternate admin credentials                                                              |
+| **User (Demo 1)**        | `rahul@example.com`           | `User@123`  | Browse, hold seats, simulate payment, view QR & PDF tickets                              |
+| **User (Demo 2)**        | `priya@example.com`           | `User@123`  | Multi-user seat reservation & concurrency testing                                        |
+| **User (Demo 3)**        | `amit@example.com`            | `User@123`  | Booking cancellation and refunds testing                                                 |
 
 > 💡 **Tip**: On the Login screen, click the **"Admin Demo"** or **"User Demo"** quick-fill buttons to sign in without typing!
 
@@ -509,13 +514,26 @@ IMovies incorporates an enterprise-grade communications workflow:
 
 ---
 
-## ☁️ 12. Serverless & Vercel Deployment Architecture
+## ☁️ 12. Production Cloud Deployment Architecture
 
-When deployed on **Vercel** (`serverless` mode):
+IMovies uses a decoupled dual-cloud production architecture optimized for low-latency frontend delivery and persistent 24/7 backend socket connections:
 
-1. **Database Connection Pooling**: Mongoose reuses cached connections across serverless lambda invocations to avoid exhausting Atlas connection pools.
-2. **Lazy Hold Cleanup Engine**: In a serverless environment where background daemons (`node-cron`) do not persist, `cleanupExpiredHolds()` executes lazily and opportunistically on incoming API requests (`server/api/index.js`, `getAdminBookings`, and `getUserBookings`).
-3. **Single Monorepo Routing**: `vercel.json` maps `/api/*` to the Node.js serverless function (`server/api/index.js`) and routes all other paths to the static Vite frontend (`client/dist`).
+1. **Frontend (Vercel)**:
+   - Hosted at: [https://imovies-iota.vercel.app](https://imovies-iota.vercel.app)
+   - Built with Vite 5.4 SPA, served edge-wide with instant global CDN caching.
+   - SPA routing managed via `client/vercel.json` rewrites.
+
+2. **Backend API & WebSockets (Render)**:
+   - Hosted at: [https://imovies-57vs.onrender.com](https://imovies-57vs.onrender.com)
+   - Running full Node.js v20 runtime with persistent Socket.io server and active `node-cron` background hold cleanup.
+   - Health monitoring endpoint: `/api/health`
+
+3. **Cloud Database (MongoDB Atlas)**:
+   - Cloud multi-node replica set with automated failover and ACID multi-document transactions.
+   - Network IP Access configured for seamless cloud hosting connectivity.
+
+4. **Transactional Email Engine (Brevo REST API + SMTP)**:
+   - Reliable high-deliverability transactional emails for password reset OTPs and instant in-memory PDF tickets.
 
 ---
 
@@ -555,7 +573,7 @@ npm run build
 
 ### Q3: Abandoned checkout shows "Awaiting Payment" in admin ledger?
 
-- **Solution**: Any unpaid seat hold expires automatically after 7 minutes. The serverless cleanup engine transitions expired holds to `EXPIRED` and frees seats upon any ledger query or API request. Administrators can also delete records directly with the Trash button.
+- **Solution**: Any unpaid seat hold expires automatically after 7 minutes. The cleanup engine transitions expired holds to `EXPIRED` and frees seats upon any ledger query or cron sweep. Administrators can also delete records directly with the Trash button.
 
 ### Q4: Port conflict on 5001 or 5173?
 
@@ -570,6 +588,6 @@ npm run build
 
 ## 📄 License & Maintainer
 
-This project is engineered and maintained by **Shahnawaj Khan** ([@shahnawajkhankhan186-ops](https://github.com/shahnawajkhankhan186-ops)).
+This project is maintained by **Satyam Gupta** ([@horix1540](https://github.com/horix1540)).
 
-Developed for high-concurrency cinema ticketing and auditorium administration. All rights reserved.
+Engineered for high-concurrency cinema ticketing and auditorium administration. All rights reserved.
